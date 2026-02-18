@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <meta name="description" content="VIP ERP — Enterprise Accounting System. Modern, Bilingual, ZATCA-compliant."/>
+  <title>VIP ERP | نظام المحاسبة المتكامل</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ══════════════ TOPBAR ══════════════ -->
+<header id="topbar">
+  <div class="tb-left">
+    <button id="sidebar-toggle" class="icon-btn" aria-label="Toggle Sidebar">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#lg1)"/>
+        <defs><linearGradient id="lg1" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#C8A84B"/><stop offset="1" stop-color="#8B6914"/></linearGradient></defs>
+        <path d="M8 10h6v6H8zM18 10h6v6h-6zM8 18h6v6H8zM18 21h3M19.5 19.5v3" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <span class="logo-text">VIP <em>ERP</em></span>
+    </div>
+  </div>
+  <div class="tb-center">
+    <div class="global-search" id="global-search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="global-search" placeholder="" data-key="search_placeholder" autocomplete="off"/>
+      <kbd>Ctrl+K</kbd>
+    </div>
+  </div>
+  <div class="tb-right">
+    <button class="icon-btn notif-btn" id="notif-btn" aria-label="Notifications">
+      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+      <span class="notif-badge">3</span>
+    </button>
+    <button class="icon-btn" id="lang-btn" aria-label="Language">
+      <span id="lang-label">ع</span>
+    </button>
+    <button class="icon-btn" id="theme-btn" aria-label="Theme">
+      <svg id="ic-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      <svg id="ic-sun" viewBox="0 0 24 24" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+    </button>
+    <div class="avatar-wrap">
+      <div class="avatar">MS</div>
+      <div class="avatar-info">
+        <span class="av-name" data-key="user_name">Mohammed Salah</span>
+        <span class="av-role" data-key="user_role">System Admin</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════ SIDEBAR ══════════════ -->
+<aside id="sidebar">
+  <nav class="sidebar-nav">
+    <div class="nav-section-label" data-key="nav_main">MAIN</div>
+    <a href="#" class="nav-item active" data-module="dashboard">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <span data-key="nav_dashboard">Dashboard</span>
+    </a>
+    <a href="#" class="nav-item" data-module="sales">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span data-key="nav_sales">Sales</span>
+      <span class="nav-badge">12</span>
+    </a>
+    <a href="#" class="nav-item" data-module="purchase">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+      <span data-key="nav_purchase">Purchase</span>
+    </a>
+    <a href="#" class="nav-item" data-module="accounting">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 110 7H6"/></svg>
+      <span data-key="nav_accounting">Accounting</span>
+    </a>
+    <a href="#" class="nav-item" data-module="inventory">
+      <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27,6.96 12,12.01 20.73,6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+      <span data-key="nav_inventory">Inventory</span>
+    </a>
+    <div class="nav-section-label" data-key="nav_people">PEOPLE</div>
+    <a href="#" class="nav-item" data-module="customers">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      <span data-key="nav_customers">Customers</span>
+    </a>
+    <a href="#" class="nav-item" data-module="hr">
+      <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-4 0v2M12 12v4M10 14h4"/></svg>
+      <span data-key="nav_hr">HR & Payroll</span>
+    </a>
+    <div class="nav-section-label" data-key="nav_analytics">ANALYTICS</div>
+    <a href="#" class="nav-item" data-module="reports">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      <span data-key="nav_reports">Reports</span>
+    </a>
+    <a href="#" class="nav-item" data-module="settings">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      <span data-key="nav_settings">Settings</span>
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="company-info">
+      <div class="company-dot"></div>
+      <div>
+        <div class="company-name" data-key="company_name">Al-Rashidi Corp.</div>
+        <div class="company-year" data-key="fiscal_year">FY 2025 · SAR</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ══════════════ MAIN CONTENT ══════════════ -->
+<main id="main-content">
+
+  <!-- ── DASHBOARD MODULE ── -->
+  <div class="module-view active" id="mod-dashboard">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title" data-key="dash_title">Dashboard</h1>
+        <p class="page-sub" data-key="dash_sub">Welcome back, Mohammed — here's your business at a glance</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-ghost" onclick="openModal('quick-add')" data-key="btn_quick_add">+ Quick Add</button>
+        <button class="btn btn-primary" onclick="openModal('new-invoice')">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <span data-key="btn_new_invoice">New Invoice</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- KPI CARDS -->
+    <div class="kpi-grid">
+      <div class="kpi-card" onclick="openModule('accounting')">
+        <div class="kpi-icon kpi-green">
+          <svg viewBox="0 0 24 24"><polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/><polyline points="17,6 23,6 23,12"/></svg>
+        </div>
+        <div class="kpi-body">
+          <div class="kpi-label" data-key="kpi_revenue">Total Revenue</div>
+          <div class="kpi-value">SAR 1,240,500</div>
+          <div class="kpi-change positive">↑ 18.4% <span data-key="vs_last">vs last month</span></div>
+        </div>
+        <div class="kpi-spark" id="spark1"></div>
+      </div>
+      <div class="kpi-card" onclick="openModule('sales')">
+        <div class="kpi-icon kpi-blue">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+        </div>
+        <div class="kpi-body">
+          <div class="kpi-label" data-key="kpi_invoices">Total Invoices</div>
+          <div class="kpi-value">342</div>
+          <div class="kpi-change positive">↑ 12.1% <span data-key="vs_last">vs last month</span></div>
+        </div>
+        <div class="kpi-spark" id="spark2"></div>
+      </div>
+      <div class="kpi-card" onclick="openModule('accounting')">
+        <div class="kpi-icon kpi-amber">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+        </div>
+        <div class="kpi-body">
+          <div class="kpi-label" data-key="kpi_receivable">Outstanding AR</div>
+          <div class="kpi-value">SAR 89,200</div>
+          <div class="kpi-change negative">8 <span data-key="overdue">overdue</span></div>
+        </div>
+        <div class="kpi-spark" id="spark3"></div>
+      </div>
+      <div class="kpi-card" onclick="openModule('inventory')">
+        <div class="kpi-icon kpi-purple">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        </div>
+        <div class="kpi-body">
+          <div class="kpi-label" data-key="kpi_stock">Stock Items</div>
+          <div class="kpi-value">1,204</div>
+          <div class="kpi-change warning">5 <span data-key="low_stock">low stock</span></div>
+        </div>
+        <div class="kpi-spark" id="spark4"></div>
+      </div>
+    </div>
+
+    <!-- CHARTS ROW -->
+    <div class="charts-row">
+      <div class="chart-card large-chart">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title" data-key="ch_revenue">Revenue & Expenses</div>
+            <div class="chart-sub" data-key="ch_revenue_sub">Last 12 months</div>
+          </div>
+          <div class="chart-tabs">
+            <button class="chart-tab active" data-key="tab_monthly">Monthly</button>
+            <button class="chart-tab" data-key="tab_quarterly">Quarterly</button>
+          </div>
+        </div>
+        <canvas id="revenueChart" height="220"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title" data-key="ch_breakdown">Revenue Breakdown</div>
+            <div class="chart-sub" data-key="ch_breakdown_sub">By category</div>
+          </div>
+        </div>
+        <canvas id="breakdownChart" height="200"></canvas>
+        <div class="donut-legend" id="donut-legend"></div>
+      </div>
+    </div>
+
+    <!-- BOTTOM ROW -->
+    <div class="bottom-row">
+      <!-- Recent Transactions -->
+      <div class="table-card">
+        <div class="table-header">
+          <div class="chart-title" data-key="recent_tx">Recent Transactions</div>
+          <button class="btn btn-ghost sm" onclick="openModule('accounting')" data-key="view_all">View All</button>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th data-key="th_ref">Reference</th>
+                <th data-key="th_party">Party</th>
+                <th data-key="th_date">Date</th>
+                <th data-key="th_amount">Amount</th>
+                <th data-key="th_status">Status</th>
+              </tr>
+            </thead>
+            <tbody id="recent-tx-body"></tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Quick Actions -->
+      <div class="quick-panel">
+        <div class="chart-title" data-key="quick_actions">Quick Actions</div>
+        <div class="quick-grid">
+          <button class="quick-btn" onclick="openModal('new-invoice')">
+            <span class="qb-icon">📄</span>
+            <span data-key="qa_invoice">New Invoice</span>
+          </button>
+          <button class="quick-btn" onclick="openModal('record-payment')">
+            <span class="qb-icon">💳</span>
+            <span data-key="qa_payment">Payment</span>
+          </button>
+          <button class="quick-btn" onclick="openModal('add-customer')">
+            <span class="qb-icon">👤</span>
+            <span data-key="qa_customer">Customer</span>
+          </button>
+          <button class="quick-btn" onclick="openModal('stock-entry')">
+            <span class="qb-icon">📦</span>
+            <span data-key="qa_stock">Stock Entry</span>
+          </button>
+          <button class="quick-btn" onclick="openModal('journal-entry')">
+            <span class="qb-icon">📒</span>
+            <span data-key="qa_journal">Journal Entry</span>
+          </button>
+          <button class="quick-btn" onclick="openModule('reports')">
+            <span class="qb-icon">📊</span>
+            <span data-key="qa_reports">Reports</span>
+          </button>
+        </div>
+        <!-- AR Aging -->
+        <div class="aging-section">
+          <div class="chart-title" style="margin-bottom:14px" data-key="ar_aging">AR Aging Summary</div>
+          <div class="aging-bar-wrap">
+            <div class="aging-bar"><div class="aging-fill" style="width:60%;background:var(--success)"></div></div>
+            <div class="aging-label"><span data-key="aging_current">Current</span><span class="aging-val">SAR 53,520</span></div>
+          </div>
+          <div class="aging-bar-wrap">
+            <div class="aging-bar"><div class="aging-fill" style="width:25%;background:var(--warning)"></div></div>
+            <div class="aging-label"><span data-key="aging_30">1-30 Days</span><span class="aging-val">SAR 22,300</span></div>
+          </div>
+          <div class="aging-bar-wrap">
+            <div class="aging-bar"><div class="aging-fill" style="width:10%;background:var(--danger)"></div></div>
+            <div class="aging-label"><span data-key="aging_60">31-60 Days</span><span class="aging-val">SAR 8,900</span></div>
+          </div>
+          <div class="aging-bar-wrap">
+            <div class="aging-bar"><div class="aging-fill" style="width:5%;background:#7f1d1d"></div></div>
+            <div class="aging-label"><span data-key="aging_over">60+ Days</span><span class="aging-val">SAR 4,480</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SALES MODULE ── -->
+  <div class="module-view" id="mod-sales">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title" data-key="sales_title">Sales Management</h1>
+        <p class="page-sub" data-key="sales_sub">Manage invoices, quotations & customer orders</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-ghost" data-key="btn_quotation">New Quotation</button>
+        <button class="btn btn-primary" onclick="openModal('new-invoice')">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <span data-key="btn_new_invoice">New Invoice</span>
+        </button>
+      </div>
+    </div>
+    <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="kpi-card"><div class="kpi-icon kpi-green"><svg viewBox="0 0 24 24"><polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/></svg></div><div class="kpi-body"><div class="kpi-label" data-key="mtd_sales">MTD Sales</div><div class="kpi-value">SAR 412,800</div><div class="kpi-change positive">↑ 22%</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon kpi-blue"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></div><div class="kpi-body"><div class="kpi-label" data-key="pending_inv">Pending</div><div class="kpi-value">23</div><div class="kpi-change warning" data-key="needs_action">Needs action</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon kpi-amber"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div><div class="kpi-body"><div class="kpi-label" data-key="avg_invoice">Avg Invoice</div><div class="kpi-value">SAR 1,206</div><div class="kpi-change positive">↑ 5%</div></div></div>
+    </div>
+    <div class="table-card" style="margin-top:0">
+      <div class="table-header">
+        <div class="chart-title" data-key="sales_list">Sales Invoices</div>
+        <div class="table-controls">
+          <input class="table-search" type="text" placeholder="Search invoices..." data-key-ph="search_invoices"/>
+          <select class="table-filter"><option data-key="all_status">All Status</option><option data-key="paid">Paid</option><option data-key="unpaid">Unpaid</option><option data-key="overdue">Overdue</option></select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr>
+            <th data-key="th_invoice">Invoice #</th>
+            <th data-key="th_customer">Customer</th>
+            <th data-key="th_date">Date</th>
+            <th data-key="th_due">Due Date</th>
+            <th data-key="th_amount">Amount</th>
+            <th data-key="th_status">Status</th>
+            <th data-key="th_actions">Actions</th>
+          </tr></thead>
+          <tbody id="sales-table-body"></tbody>
+        </table>
+      </div>
+      <div class="table-pagination">
+        <span class="page-info" data-key="showing_records">Showing 1-10 of 342 records</span>
+        <div class="page-btns">
+          <button class="page-btn">‹</button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">›</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ACCOUNTING MODULE ── -->
+  <div class="module-view" id="mod-accounting">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title" data-key="acc_title">Accounting</h1>
+        <p class="page-sub" data-key="acc_sub">Chart of accounts, journal entries & financial overview</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-ghost" onclick="openModal('journal-entry')" data-key="btn_journal">Journal Entry</button>
+        <button class="btn btn-primary" onclick="openModule('reports')">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span data-key="btn_fin_reports">Financial Reports</span>
+        </button>
+      </div>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-icon kpi-green"><svg viewBox="0 0 24 24"><polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/></svg></div><div class="kpi-body"><div class="kpi-label" data-key="kpi_assets">Total Assets</div><div class="kpi-value">SAR 4,820,000</div><div class="kpi-change positive">Balance Sheet</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon kpi-amber"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5"/></svg></div><div class="kpi-body"><div class="kpi-label" data-key="kpi_liabilities">Liabilities</div><div class="kpi-value">SAR 1,240,000</div><div class="kpi-change warning">Under control</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon kpi-blue"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/></svg></div><div class="kpi-body"><div class="kpi-label" data-key="kpi_equity">Equity</div><div class="kpi-value">SAR 3,580,000</div><div class="kpi-change positive">↑ 8.2%</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon kpi-purple"><svg viewBox="0 0 24 24"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg></div><div class="kpi-body"><div class="kpi-label" data-key="kpi_net_profit">Net Profit</div><div class="kpi-value">SAR 312,450</div><div class="kpi-change positive">↑ 15.7%</div></div></div>
+    </div>
+    <!-- COA -->
+    <div class="table-card">
+      <div class="table-header">
+        <div class="chart-title" data-key="coa_title">Chart of Accounts</div>
+        <div class="table-controls">
+          <input class="table-search" type="text" placeholder="Search accounts..."/>
+          <button class="btn btn-ghost sm" data-key="btn_add_account">+ Add Account</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr>
+            <th data-key="th_acc_code">Code</th>
+            <th data-key="th_acc_name">Account Name</th>
+            <th data-key="th_acc_type">Type</th>
+            <th data-key="th_acc_balance">Balance</th>
+            <th data-key="th_acc_group">Group</th>
+          </tr></thead>
+          <tbody id="coa-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── INVENTORY MODULE ── -->
+  <div class="module-view" id="mod-inventory">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title" data-key="inv_title">Inventory Management</h1>
+        <p class="page-sub" data-key="inv_sub">Real-time stock tracking across all warehouses</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-ghost" onclick="openModal('stock-entry')" data-key="btn_stock_entry">Stock Entry</button>
+        <button class="btn btn-primary">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <span data-key="btn_add_item">Add Item</span>
+        </button>
+      </div>
+    </div>
+    <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="kpi-card"><div class="kpi-icon kpi-green"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div><div class="kpi-body"><div class="kpi-label" data-key="total_items">Total Items</div><div class="kpi-value">1,204</div><div class="kpi-change positive">In 3 warehouses</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon kpi-amber"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="kpi-body"><div class="kpi-label" data-key="low_stock_items">Low Stock</div><div class="kpi-value">5</div><div class="kpi-change negative" data-key="reorder_needed">Reorder needed</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon kpi-blue"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16,8 20,8 23,11 23,16 16,16 16,8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="kpi-body"><div class="kpi-label" data-key="stock_value">Stock Value</div><div class="kpi-value">SAR 2,840,200</div><div class="kpi-change positive">↑ 4.1%</div></div></div>
+    </div>
+    <div class="table-card" style="margin-top:0">
+      <div class="table-header">
+        <div class="chart-title" data-key="item_list">Item List</div>
+        <div class="table-controls">
+          <input class="table-search" type="text" placeholder="Search items..."/>
+          <select class="table-filter"><option data-key="all_warehouses">All Warehouses</option><option>Main Warehouse</option><option>Riyadh Branch</option></select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr>
+            <th data-key="th_item_code">Code</th>
+            <th data-key="th_item_name">Item Name</th>
+            <th data-key="th_warehouse">Warehouse</th>
+            <th data-key="th_qty">Qty</th>
+            <th data-key="th_unit_price">Unit Price</th>
+            <th data-key="th_total_val">Total Value</th>
+            <th data-key="th_status">Status</th>
+          </tr></thead>
+          <tbody id="inventory-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CUSTOMERS MODULE ── -->
+  <div class="module-view" id="mod-customers">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title" data-key="cust_title">Customers & CRM</h1>
+        <p class="page-sub" data-key="cust_sub">Manage your customer relationships</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-primary" onclick="openModal('add-customer')">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <span data-key="btn_add_customer">Add Customer</span>
+        </button>
+      </div>
+    </div>
+    <div class="customers-grid" id="customers-grid"></div>
+  </div>
+
+  <!-- ── HR MODULE ── -->
+  <div class="module-view" id="mod-hr">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title" data-key="hr_title">HR & Payroll</h1>
+        <p class="page-sub" data-key="hr_sub">Saudi labor law compliant — GOSI integrated</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-ghost" data-key="btn_run_payroll">Run Payroll</button>
+        <button class="btn btn-primary">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <span data-key="btn_add_employee">Add Employee</span>
+        </button>
+      </div>
+    </div>
+    <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr)">
+      <div class="kpi-card"><div class="kpi-icon kpi-blue"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="kpi-body"><div class="kpi-label" data-key="total_employees">Employees</div><div class="kpi-value">48</div><div class="kpi-change positive">Active</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon kpi-green"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/></svg></div><div class="kpi-body"><div class="kpi-label" data-key="payroll_cost">Payroll / Month</div><div class="kpi-value">SAR 284,000</div><div class="kpi-change positive">On budget</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon kpi-amber"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/></svg></div><div class="kpi-body"><div class="kpi-label" data-key="pending_leaves">Pending Leaves</div><div class="kpi-value">7</div><div class="kpi-change warning" data-key="for_approval">For approval</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon kpi-purple"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="kpi-body"><div class="kpi-label" data-key="gosi_contrib">GOSI Contribution</div><div class="kpi-value">SAR 28,400</div><div class="kpi-change positive">Compliant</div></div></div>
+    </div>
+    <div class="table-card" style="margin-top:0">
+      <div class="table-header"><div class="chart-title" data-key="employee_list">Employee List</div></div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr>
+            <th data-key="th_emp_id">ID</th>
+            <th data-key="th_emp_name">Name</th>
+            <th data-key="th_department">Department</th>
+            <th data-key="th_position">Position</th>
+            <th data-key="th_salary">Salary</th>
+            <th data-key="th_gosi">GOSI</th>
+            <th data-key="th_status">Status</th>
+          </tr></thead>
+          <tbody id="hr-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── REPORTS MODULE ── -->
+  <div class="module-view" id="mod-reports">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title" data-key="rep_title">Financial Reports</h1>
+        <p class="page-sub" data-key="rep_sub">IFRS-compliant reports — Export to PDF & Excel</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-ghost" data-key="btn_export_pdf">Export PDF</button>
+        <button class="btn btn-primary" data-key="btn_export_excel">Export Excel</button>
+      </div>
+    </div>
+    <div class="reports-grid">
+      <div class="report-card" onclick="openModal('report-pl')">
+        <div class="report-icon">📊</div>
+        <div class="report-name" data-key="rep_pl">Profit & Loss</div>
+        <div class="report-desc" data-key="rep_pl_desc">Income statement with YoY comparison</div>
+        <div class="report-meta">IFRS Compliant · PDF / Excel</div>
+      </div>
+      <div class="report-card" onclick="openModal('report-bs')">
+        <div class="report-icon">📋</div>
+        <div class="report-name" data-key="rep_bs">Balance Sheet</div>
+        <div class="report-desc" data-key="rep_bs_desc">Assets, liabilities & equity snapshot</div>
+        <div class="report-meta">IFRS Compliant · PDF / Excel</div>
+      </div>
+      <div class="report-card">
+        <div class="report-icon">🔄</div>
+        <div class="report-name" data-key="rep_cf">Cash Flow</div>
+        <div class="report-desc" data-key="rep_cf_desc">Operating, investing & financing activities</div>
+        <div class="report-meta">IFRS Compliant · PDF / Excel</div>
+      </div>
+      <div class="report-card">
+        <div class="report-icon">⚖️</div>
+        <div class="report-name" data-key="rep_tb">Trial Balance</div>
+        <div class="report-desc" data-key="rep_tb_desc">Debit & credit balances verification</div>
+        <div class="report-meta">Auto-balanced · PDF / Excel</div>
+      </div>
+      <div class="report-card">
+        <div class="report-icon">🧾</div>
+        <div class="report-name" data-key="rep_vat">VAT Return</div>
+        <div class="report-desc" data-key="rep_vat_desc">ZATCA-compliant VAT return report</div>
+        <div class="report-meta">ZATCA Phase 2 · XML / PDF</div>
+      </div>
+      <div class="report-card">
+        <div class="report-icon">📈</div>
+        <div class="report-name" data-key="rep_ar">AR Aging</div>
+        <div class="report-desc" data-key="rep_ar_desc">Receivables aged by 30/60/90 days</div>
+        <div class="report-meta">Collection tool · PDF / Excel</div>
+      </div>
+    </div>
+    <!-- P&L Preview -->
+    <div class="table-card">
+      <div class="table-header">
+        <div class="chart-title" data-key="pl_preview">P&L Preview — FY 2025</div>
+        <select class="table-filter"><option>FY 2025</option><option>FY 2024</option></select>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table pl-table">
+          <tbody id="pl-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SETTINGS MODULE ── -->
+  <div class="module-view" id="mod-settings">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title" data-key="set_title">System Settings</h1>
+        <p class="page-sub" data-key="set_sub">Configure your ERP environment</p>
+      </div>
+    </div>
+    <div class="settings-grid">
+      <div class="settings-card">
+        <div class="settings-icon">🏢</div>
+        <div class="settings-name" data-key="set_company">Company Profile</div>
+        <div class="settings-desc" data-key="set_company_desc">Name, logo, CR number, fiscal year</div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-icon">💱</div>
+        <div class="settings-name" data-key="set_currency">Currencies</div>
+        <div class="settings-desc" data-key="set_currency_desc">Multi-currency & exchange rates</div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-icon">👥</div>
+        <div class="settings-name" data-key="set_users">Users & Roles</div>
+        <div class="settings-desc" data-key="set_users_desc">Permissions & access control</div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-icon">🧾</div>
+        <div class="settings-name" data-key="set_zatca">ZATCA E-Invoicing</div>
+        <div class="settings-desc" data-key="set_zatca_desc">Phase 2 configuration & certificates</div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-icon">🔗</div>
+        <div class="settings-name" data-key="set_integrations">Integrations</div>
+        <div class="settings-desc" data-key="set_integrations_desc">WhatsApp, Banks, Payment gateways</div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-icon">💾</div>
+        <div class="settings-name" data-key="set_backup">Backup & Security</div>
+        <div class="settings-desc" data-key="set_backup_desc">Auto backup, 2FA, audit logs</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PURCHASE MODULE ── -->
+  <div class="module-view" id="mod-purchase">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title" data-key="pur_title">Purchase Management</h1>
+        <p class="page-sub" data-key="pur_sub">Purchase orders, vendor bills & GRN</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-primary">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <span data-key="btn_new_po">New Purchase Order</span>
+        </button>
+      </div>
+    </div>
+    <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="kpi-card"><div class="kpi-icon kpi-blue"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/></svg></div><div class="kpi-body"><div class="kpi-label" data-key="mtd_purchase">MTD Purchases</div><div class="kpi-value">SAR 285,600</div><div class="kpi-change positive">12 POs</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon kpi-amber"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg></div><div class="kpi-body"><div class="kpi-label" data-key="pending_po">Pending POs</div><div class="kpi-value">8</div><div class="kpi-change warning" data-key="awaiting_grn">Awaiting GRN</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon kpi-purple"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5"/></svg></div><div class="kpi-body"><div class="kpi-label" data-key="ap_outstanding">AP Outstanding</div><div class="kpi-value">SAR 124,800</div><div class="kpi-change warning" data-key="due_soon">Due soon</div></div></div>
+    </div>
+    <div class="table-card" style="margin-top:0">
+      <div class="table-header"><div class="chart-title" data-key="po_list">Purchase Orders</div></div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr>
+            <th data-key="th_po_num">PO #</th>
+            <th data-key="th_vendor">Vendor</th>
+            <th data-key="th_date">Date</th>
+            <th data-key="th_amount">Amount</th>
+            <th data-key="th_status">Status</th>
+            <th data-key="th_actions">Actions</th>
+          </tr></thead>
+          <tbody id="purchase-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ══════════════ MODALS ══════════════ -->
+
+<!-- New Invoice Modal -->
+<div class="modal-overlay" id="modal-new-invoice" onclick="if(event.target===this)closeModal('new-invoice')">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title-wrap">
+        <span class="modal-icon">📄</span>
+        <h2 class="modal-title" data-key="new_invoice_title">New Sales Invoice</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('new-invoice')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label class="form-label" data-key="lbl_customer">Customer *</label>
+          <select class="form-select"><option>Ahmed Al-Rashidi</option><option>Sarah Al-Otaibi</option><option>Gulf Trading Co.</option></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-key="lbl_invoice_date">Invoice Date *</label>
+          <input class="form-input" type="date" value="2025-02-18"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-key="lbl_due_date">Due Date *</label>
+          <input class="form-input" type="date" value="2025-03-18"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-key="lbl_currency">Currency</label>
+          <select class="form-select"><option>SAR — Saudi Riyal</option><option>AED — UAE Dirham</option><option>USD — US Dollar</option></select>
+        </div>
+      </div>
+      <div class="items-section">
+        <div class="items-header">
+          <span class="form-label" data-key="lbl_items">Line Items</span>
+          <button class="btn btn-ghost sm" onclick="addInvoiceLine()" data-key="btn_add_line">+ Add Line</button>
+        </div>
+        <div class="items-table-wrap">
+          <table class="items-table">
+            <thead><tr>
+              <th data-key="th_item">Item</th>
+              <th data-key="th_qty">Qty</th>
+              <th data-key="th_price">Price</th>
+              <th data-key="th_vat">VAT 15%</th>
+              <th data-key="th_total">Total</th>
+              <th></th>
+            </tr></thead>
+            <tbody id="invoice-lines">
+              <tr class="item-row">
+                <td><input class="form-input sm" type="text" placeholder="Item name..." value="Office Chair Premium"/></td>
+                <td><input class="form-input sm number" type="number" value="2" oninput="calcLine(this)"/></td>
+                <td><input class="form-input sm number" type="number" value="850" oninput="calcLine(this)"/></td>
+                <td class="vat-cell">SAR 255</td>
+                <td class="total-cell">SAR 1,955</td>
+                <td><button class="remove-line" onclick="this.closest('tr').remove();calcTotal()">✕</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="invoice-totals">
+          <div class="inv-total-row"><span data-key="subtotal">Subtotal</span><span id="inv-subtotal">SAR 1,700</span></div>
+          <div class="inv-total-row"><span data-key="vat_15">VAT (15%)</span><span id="inv-vat">SAR 255</span></div>
+          <div class="inv-total-row total-row"><span data-key="grand_total">Grand Total</span><span id="inv-grand">SAR 1,955</span></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-key="lbl_notes">Notes</label>
+        <textarea class="form-textarea" rows="2" data-key-ph="invoice_notes_ph"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('new-invoice')" data-key="btn_cancel">Cancel</button>
+      <button class="btn btn-ghost" data-key="btn_save_draft">Save Draft</button>
+      <button class="btn btn-primary" onclick="showToast('success','Invoice INV-2025-343 created successfully!');closeModal('new-invoice')">
+        <span data-key="btn_submit_invoice">Submit Invoice</span>
+      </button>
+    </div>
+    <div class="modal-cta">
+      <a href="https://wa.me/201113903070" target="_blank" class="cta-wa-link">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM11.99 0C5.37 0 0 5.373 0 12c0 2.117.55 4.112 1.51 5.85L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.617 0 11.99 0zm.01 21.818a9.814 9.814 0 01-5.001-1.37l-.36-.214-3.732.979 1.003-3.608-.233-.371A9.818 9.818 0 012.183 12c0-5.42 4.407-9.818 9.817-9.818 5.411 0 9.818 4.397 9.818 9.818 0 5.42-4.407 9.818-9.818 9.818z" fill="currentColor"/></svg>
+        Need help? Chat with our team
+      </a>
+      <a href="https://moh222salah.github.io/cv" target="_blank" class="cta-portfolio-link" data-key="cta_portfolio">View Developer Portfolio →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Journal Entry Modal -->
+<div class="modal-overlay" id="modal-journal-entry" onclick="if(event.target===this)closeModal('journal-entry')">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title-wrap"><span class="modal-icon">📒</span><h2 class="modal-title" data-key="je_title">Journal Entry</h2></div>
+      <button class="modal-close" onclick="closeModal('journal-entry')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid-2">
+        <div class="form-group"><label class="form-label" data-key="lbl_je_date">Date *</label><input class="form-input" type="date" value="2025-02-18"/></div>
+        <div class="form-group"><label class="form-label" data-key="lbl_je_ref">Reference</label><input class="form-input" type="text" value="JE-2025-089"/></div>
+      </div>
+      <div class="je-table-wrap">
+        <table class="items-table">
+          <thead><tr>
+            <th data-key="th_account">Account</th>
+            <th data-key="th_debit">Debit</th>
+            <th data-key="th_credit">Credit</th>
+            <th data-key="th_remarks">Remarks</th>
+          </tr></thead>
+          <tbody>
+            <tr><td><select class="form-select sm"><option>1001 - Cash</option><option>1100 - Accounts Receivable</option><option>2001 - Accounts Payable</option></select></td><td><input class="form-input sm number" type="number" value="10000"/></td><td><input class="form-input sm number" type="number" value="0"/></td><td><input class="form-input sm" type="text" value="Bank deposit"/></td></tr>
+            <tr><td><select class="form-select sm"><option>3001 - Sales Revenue</option><option>1001 - Cash</option></select></td><td><input class="form-input sm number" type="number" value="0"/></td><td><input class="form-input sm number" type="number" value="10000"/></td><td><input class="form-input sm" type="text" value="Revenue recognition"/></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="je-balance"><span data-key="je_balance_check">Balance Check:</span> <span class="balance-ok" data-key="balanced">✓ Balanced — SAR 10,000</span></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('journal-entry')" data-key="btn_cancel">Cancel</button>
+      <button class="btn btn-primary" onclick="showToast('success','Journal Entry JE-2025-089 posted!');closeModal('journal-entry')" data-key="btn_post">Post Entry</button>
+    </div>
+    <div class="modal-cta">
+      <a href="https://wa.me/201113903070" target="_blank" class="cta-wa-link">Need help? Chat with our team</a>
+      <a href="https://moh222salah.github.io/cv" target="_blank" class="cta-portfolio-link" data-key="cta_portfolio">View Developer Portfolio →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Add Customer Modal -->
+<div class="modal-overlay" id="modal-add-customer" onclick="if(event.target===this)closeModal('add-customer')">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title-wrap"><span class="modal-icon">👤</span><h2 class="modal-title" data-key="add_cust_title">Add Customer</h2></div>
+      <button class="modal-close" onclick="closeModal('add-customer')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid-2">
+        <div class="form-group"><label class="form-label" data-key="lbl_cust_name">Customer Name *</label><input class="form-input" type="text" placeholder="Full name or company"/></div>
+        <div class="form-group"><label class="form-label" data-key="lbl_cust_type">Customer Type</label><select class="form-select"><option data-key="individual">Individual</option><option data-key="company">Company</option></select></div>
+        <div class="form-group"><label class="form-label" data-key="lbl_cust_phone">Phone</label><input class="form-input" type="tel" placeholder="+966 5x xxx xxxx"/></div>
+        <div class="form-group"><label class="form-label" data-key="lbl_cust_email">Email</label><input class="form-input" type="email" placeholder="customer@example.com"/></div>
+        <div class="form-group"><label class="form-label" data-key="lbl_vat_number">VAT Number</label><input class="form-input" type="text" placeholder="3xxxxxxxxx3"/></div>
+        <div class="form-group"><label class="form-label" data-key="lbl_cr_number">CR Number</label><input class="form-input" type="text" placeholder="1010xxxxxx"/></div>
+        <div class="form-group"><label class="form-label" data-key="lbl_city">City</label><input class="form-input" type="text" placeholder="Riyadh"/></div>
+        <div class="form-group"><label class="form-label" data-key="lbl_credit_limit">Credit Limit</label><input class="form-input" type="number" placeholder="SAR 50,000"/></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('add-customer')" data-key="btn_cancel">Cancel</button>
+      <button class="btn btn-primary" onclick="showToast('success','Customer added successfully!');closeModal('add-customer')" data-key="btn_save_customer">Save Customer</button>
+    </div>
+    <div class="modal-cta">
+      <a href="https://wa.me/201113903070" target="_blank" class="cta-wa-link">Need help? Chat with our team</a>
+      <a href="https://moh222salah.github.io/cv" target="_blank" class="cta-portfolio-link" data-key="cta_portfolio">View Developer Portfolio →</a>
+    </div>
+  </div>
+</div>
+
+<!-- P&L Report Modal -->
+<div class="modal-overlay" id="modal-report-pl" onclick="if(event.target===this)closeModal('report-pl')">
+  <div class="modal-box large">
+    <div class="modal-head">
+      <div class="modal-title-wrap"><span class="modal-icon">📊</span><h2 class="modal-title" data-key="pl_modal_title">Profit & Loss Statement</h2></div>
+      <button class="modal-close" onclick="closeModal('report-pl')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="report-meta-bar">
+        <span data-key="period">Period:</span> <strong>January – December 2025</strong>
+        <span style="margin-left:20px" data-key="company_label">Company:</span> <strong>Al-Rashidi Corp.</strong>
+        <span style="margin-left:20px" data-key="currency_label">Currency:</span> <strong>SAR</strong>
+      </div>
+      <table class="data-table pl-table">
+        <thead><tr><th data-key="account_name_h">Account</th><th data-key="fy2025_h">FY 2025</th><th data-key="fy2024_h">FY 2024</th><th data-key="variance_h">Variance</th></tr></thead>
+        <tbody>
+          <tr class="pl-section"><td colspan="4" data-key="income_section">INCOME</td></tr>
+          <tr><td class="pl-indent" data-key="pl_sales_rev">Sales Revenue</td><td>1,240,500</td><td>1,045,200</td><td class="positive">+18.7%</td></tr>
+          <tr><td class="pl-indent" data-key="pl_service_rev">Service Revenue</td><td>320,000</td><td>280,000</td><td class="positive">+14.3%</td></tr>
+          <tr class="pl-subtotal"><td data-key="total_income">Total Income</td><td>1,560,500</td><td>1,325,200</td><td class="positive">+17.8%</td></tr>
+          <tr class="pl-section"><td colspan="4" data-key="cogs_section">COST OF GOODS SOLD</td></tr>
+          <tr><td class="pl-indent" data-key="pl_cogs">Cost of Goods</td><td>742,000</td><td>645,000</td><td class="negative">+15.0%</td></tr>
+          <tr class="pl-subtotal"><td data-key="gross_profit">Gross Profit</td><td>818,500</td><td>680,200</td><td class="positive">+20.3%</td></tr>
+          <tr class="pl-section"><td colspan="4" data-key="opex_section">OPERATING EXPENSES</td></tr>
+          <tr><td class="pl-indent" data-key="pl_salaries">Salaries & Benefits</td><td>284,000</td><td>260,000</td><td class="negative">+9.2%</td></tr>
+          <tr><td class="pl-indent" data-key="pl_rent">Rent</td><td>120,000</td><td>120,000</td><td>0%</td></tr>
+          <tr><td class="pl-indent" data-key="pl_utilities">Utilities</td><td>48,000</td><td>42,000</td><td class="negative">+14.3%</td></tr>
+          <tr><td class="pl-indent" data-key="pl_marketing">Marketing</td><td>54,050</td><td>38,000</td><td class="negative">+42.2%</td></tr>
+          <tr class="pl-subtotal"><td data-key="total_opex">Total OpEx</td><td>506,050</td><td>460,000</td><td class="negative">+10.0%</td></tr>
+          <tr class="pl-total"><td data-key="net_profit_row">NET PROFIT</td><td>312,450</td><td>220,200</td><td class="positive">+41.9%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('report-pl')" data-key="btn_close">Close</button>
+      <button class="btn btn-ghost" data-key="btn_export_excel">Export Excel</button>
+      <button class="btn btn-primary" data-key="btn_export_pdf">Export PDF</button>
+    </div>
+    <div class="modal-cta">
+      <a href="https://wa.me/201113903070" target="_blank" class="cta-wa-link">Need help? Chat with our team</a>
+      <a href="https://moh222salah.github.io/cv" target="_blank" class="cta-portfolio-link" data-key="cta_portfolio">View Developer Portfolio →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Stock Entry Modal -->
+<div class="modal-overlay" id="modal-stock-entry" onclick="if(event.target===this)closeModal('stock-entry')">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title-wrap"><span class="modal-icon">📦</span><h2 class="modal-title" data-key="se_title">Stock Entry</h2></div>
+      <button class="modal-close" onclick="closeModal('stock-entry')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid-2">
+        <div class="form-group"><label class="form-label" data-key="lbl_entry_type">Entry Type *</label><select class="form-select"><option data-key="se_receipt">Material Receipt</option><option data-key="se_issue">Material Issue</option><option data-key="se_transfer">Stock Transfer</option></select></div>
+        <div class="form-group"><label class="form-label" data-key="lbl_se_date">Date *</label><input class="form-input" type="date" value="2025-02-18"/></div>
+        <div class="form-group"><label class="form-label" data-key="lbl_warehouse">Warehouse *</label><select class="form-select"><option>Main Warehouse</option><option>Riyadh Branch</option><option>Jeddah Branch</option></select></div>
+        <div class="form-group"><label class="form-label" data-key="lbl_ref_doc">Reference</label><input class="form-input" type="text" placeholder="PO-2025-012"/></div>
+      </div>
+      <div class="items-section">
+        <div class="items-header"><span class="form-label" data-key="lbl_items">Items</span><button class="btn btn-ghost sm" data-key="btn_add_item_line">+ Add Item</button></div>
+        <div class="items-table-wrap">
+          <table class="items-table">
+            <thead><tr><th data-key="th_item">Item</th><th data-key="th_qty">Qty</th><th data-key="th_unit">Unit</th><th data-key="th_rate">Rate</th><th></th></tr></thead>
+            <tbody>
+              <tr class="item-row"><td><input class="form-input sm" value="Office Chair Premium"/></td><td><input class="form-input sm number" type="number" value="10"/></td><td><select class="form-select sm"><option>Nos</option><option>Box</option><option>KG</option></select></td><td><input class="form-input sm number" type="number" value="850"/></td><td><button class="remove-line" onclick="this.closest('tr').remove()">✕</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('stock-entry')" data-key="btn_cancel">Cancel</button>
+      <button class="btn btn-primary" onclick="showToast('success','Stock entry STE-2025-089 submitted!');closeModal('stock-entry')" data-key="btn_submit_se">Submit Entry</button>
+    </div>
+    <div class="modal-cta">
+      <a href="https://wa.me/201113903070" target="_blank" class="cta-wa-link">Need help? Chat with our team</a>
+      <a href="https://moh222salah.github.io/cv" target="_blank" class="cta-portfolio-link" data-key="cta_portfolio">View Developer Portfolio →</a>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIFICATION PANEL -->
+<div class="notif-panel" id="notif-panel">
+  <div class="notif-header"><span data-key="notifications">Notifications</span><button onclick="document.getElementById('notif-panel').classList.remove('open')" class="notif-close">✕</button></div>
+  <div class="notif-list">
+    <div class="notif-item unread"><div class="notif-dot"></div><div><div class="notif-text" data-key="notif1">Invoice INV-2025-342 is overdue by 5 days</div><div class="notif-time">2 hours ago</div></div></div>
+    <div class="notif-item unread"><div class="notif-dot"></div><div><div class="notif-text" data-key="notif2">Low stock alert: Office Chair (3 remaining)</div><div class="notif-time">4 hours ago</div></div></div>
+    <div class="notif-item unread"><div class="notif-dot"></div><div><div class="notif-text" data-key="notif3">ZATCA e-invoice sync completed (28 invoices)</div><div class="notif-time">Yesterday</div></div></div>
+    <div class="notif-item"><div class="notif-dot inactive"></div><div><div class="notif-text" data-key="notif4">Monthly payroll processed — SAR 284,000</div><div class="notif-time">2 days ago</div></div></div>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div id="toast-container"></div>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="search-overlay">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <svg class="search-icon-lg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search-input-main" placeholder="" data-key="search_placeholder" autocomplete="off" oninput="handleSearch(this.value)"/>
+      <kbd onclick="closeSearch()">Esc</kbd>
+    </div>
+    <div id="search-results" class="search-results"></div>
+    <div class="search-tips">
+      <span data-key="search_tip1">Navigate with ↑↓</span>
+      <span data-key="search_tip2">Open with Enter</span>
+      <span data-key="search_tip3">Close with Esc</span>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
