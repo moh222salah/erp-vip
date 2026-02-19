@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  # --- الطبقة الأولى: الواجهة الأمامية (Nordic Biz Hub Frontend) ---
+  nordic-frontend:
+    image: nordic-frontend:latest
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - NEXT_PUBLIC_API_URL=https://api.nordicbizhub.com
+    networks:
+      - public-network
+    depends_on:
+      - nordic-middleware
+
+  # --- الطبقة الثانية: الوسيط (Secure Bridge / Webhook Receiver) ---
+  nordic-middleware:
+    image: nordic-middleware:latest
+    build:
+      context: ./middleware
+    restart: always
+    environment:
+      - ERPNEXT_API_KEY=${ERPNEXT_API_KEY}
+      - ERPNEXT_API_SECRET=${ERPNEXT_API_SECRET}
+      - WEBHOOK_SECRET=${WEBHOOK_SECRET}
+      - DATABASE_URL=postgresql://user:pass@db-middleware:5432/db
+    networks:
+      - public-network
+      - private-erp-network
+    depends_on:
+      - db-middleware
+
+  # --- الطبقة الثالثة: النواة (ERPNext v16 Stack) ---
+  # ملاحظة: نستخدم هنا صور Frappe الرسمية المحسنة
+  erpnext-app:
+    image: frappe/erpnext:v16.0.0
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+    environment:
+      - DB_HOST=erp-db
+      - REDIS_CACHE=redis-cache:6379
+      - REDIS_QUEUE=redis-queue:6379
+    volumes:
+      - erp-sites:/home/frappe/frappe-bench/sites
+      - erp-logs:/home/frappe/frappe-bench/logs
+    networks:
+      - private-erp-network
+
+  erp-db:
+    image: mariadb:10.11
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+    volumes:
+      - erp-db-data:/var/lib/mysql
+    networks:
+      - private-erp-network
+
+  redis-cache:
+    image: redis:7-alpine
+    networks:
+      - private-erp-network
+
+  # --- قاعدة بيانات مخصصة للميدل وير (لضمان الاستقلالية) ---
+  db-middleware:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASS}
+    volumes:
+      - middleware-data:/var/lib/postgresql/data
+    networks:
+      - private-erp-network
+
+networks:
+  public-network:
+    driver: bridge
+  private-erp-network:
+    internal: true  # عزل كامل عن الإنترنت الخارجي
+
+volumes:
+  erp-sites:
+  erp-db-data:
+  erp-logs:
+  middleware-data:
+
